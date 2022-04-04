@@ -1,3 +1,4 @@
+
 document.getElementById('addForm').addEventListener('submit', addExpense);
 const expenses = JSON.parse(localStorage.getItem('expenses')) || [];
 
@@ -42,6 +43,7 @@ function addExpense(e){
     const deleteExpense = (id) => {
         for(let i = 0; i < expenses.length; i++){
             if(expenses[i].id == id){
+
                 expenses.splice(i, 1);
             }
         }
@@ -50,12 +52,19 @@ function addExpense(e){
     }
   
     showExpenses();
-    const editExpense = (id) => {
+    function editExpense(id){
         for(let i = 0; i < expenses.length; i++){
             if(expenses[i].id == id){
-                expenses.splice(i, 1);
+                var amount  = expenses[i].amount;
+                var description  = expenses[i].description;
+                var category  = expenses[i].dropdown; 
+                var edt = document.createElement("input");
+                edt.type = 'text';
+                edt.value = window.prompt("Enter description");
+                expenses[i].description = edt.value;
+                }
             }
-        }
+   
         localStorage.setItem('expenses', JSON.stringify(expenses));
         showExpenses();
     }
